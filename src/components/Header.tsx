@@ -13,7 +13,9 @@ export function Header({ user, onLogout, onLogin, onRegister }: Props) {
   return (
     <header className="app-header">
       <div className="title-container">
-        <h1>Le Grimoire des Héros</h1>
+        <h1 className="site-title">
+          Le Grimoire des Héros
+        </h1>
         <p className="subtitle">
           Générateur de Personnages pour Donjons & Dragons 5ème Édition
         </p>

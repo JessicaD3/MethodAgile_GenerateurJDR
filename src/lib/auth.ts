@@ -14,13 +14,14 @@ export function verifyToken(token: string) {
 }
 
 // Récupère l'ID utilisateur à partir du token stocké dans les cookies
-export async function getUserIdFromCookies() {
-  const cookieStore = await cookies();
+export async function getUserIdFromCookies(): Promise<string | null>  {
+  const cookieStore =  await cookies();
   const token = cookieStore.get("token")?.value;
-  if (!token) return null;
+    if (!token) return null;
 
   try {
-    return verifyToken(token).userId;
+    const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
+    return decoded.userId; 
   } catch {
     return null;
   }

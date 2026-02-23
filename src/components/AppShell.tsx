@@ -7,6 +7,7 @@ import { LoginModal } from "./LoginModal";
 import { RegisterModal } from "./RegisterModal";
 import { useAuth } from "./useAuth";
 import { CharacterBuilder } from "./CharactersBuilder";
+import { Library } from "./Library";
 
 export function AppShell() {
   const { user, logout, refreshUser } = useAuth();
@@ -28,29 +29,22 @@ export function AppShell() {
       <Tabs active={activeTab} onChange={setActiveTab} />
 
       <div className="tabs-container">
+
         {activeTab === "creation" && (
           <div className="tab-content active" id="creation-tab">
-            {activeTab === "creation" && (
-  <div className="tab-content active" id="creation-tab">
-    <CharacterBuilder user={user} />
-  </div>
-)}
+            <CharacterBuilder user={user} />
           </div>
         )}
 
         {activeTab === "library" && (
           <div className="tab-content active" id="library-tab">
-            <div className="library-content">
-              <h2>Bibliothèque des Aventuriers</h2>
-
-              {user ? (
-                <p>Bibliothèque en cours d’implémentation...</p>
-              ) : (
-                <p>Connexion requise pour afficher la bibliothèque.</p>
-              )}
-            </div>
+          <Library 
+            user={user} 
+            onLoginClick={() => setLoginOpen(true)} 
+/>
           </div>
         )}
+
       </div>
 
       {/* MODALS */}

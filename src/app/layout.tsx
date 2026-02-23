@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Uncial_Antiqua } from "next/font/google";
+
+const uncial = Uncial_Antiqua({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-uncial",
+});
 
 
 const geistSans = Geist({
@@ -32,7 +39,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={uncial.variable}>
         {children}
       </body>
     </html>
