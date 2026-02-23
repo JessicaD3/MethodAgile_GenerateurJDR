@@ -5,8 +5,11 @@ import { getUserIdFromCookies } from "@/lib/auth";
 
 // Route pour récupérer les informations de l'utilisateur connecté
 export async function GET() {
-  const userId = getUserIdFromCookies();
-  if (!userId) return NextResponse.json({ user: null });
+  const userId = await getUserIdFromCookies();
+
+  if (!userId) {
+    return NextResponse.json({ user: null });
+  }
 
   await dbConnect();
 

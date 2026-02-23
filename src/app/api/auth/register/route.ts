@@ -15,10 +15,16 @@ export async function POST(req: Request) {
   await dbConnect();
 
   // Vérifie si un utilisateur avec le même email existe déjà
-  const existing = await User.findOne({ email });
-  if (existing) {
-    return NextResponse.json({ error: "L'utilisateur existe déjà" }, { status: 409 });
-  }
+const existing = await User.findOne({
+  $or: [{ email }, { username }],
+});
+
+if (existing) {
+  return NextResponse.json(
+    { error: "Email ou nom d'utilisateur déjà utilisé" },
+    { status: 409 }
+  );
+}
 
   const passwordHash = await bcrypt.hash(password, 10);
 
