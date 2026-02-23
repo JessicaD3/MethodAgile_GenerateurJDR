@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Uncial_Antiqua } from "next/font/google";
+
+const uncial = Uncial_Antiqua({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-uncial",
+});
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,8 +31,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="fr">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        />
+      </head>
+
+      <body className={uncial.variable}>
         {children}
       </body>
     </html>
