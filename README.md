@@ -1,41 +1,51 @@
-<<<<<<< HEAD
-# MethodAgile_GenerateurJDR
-Projet en Méthode Agile :
-=======
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+📜 Le Grimoire des Héros
 
-## Getting Started
+Application web de génération et gestion de personnages Donjons & Dragons 5e développée avec Next.js, MongoDB et TypeScript.
 
-First, run the development server:
+🚀 Installation & Lancement
+1️⃣ Prérequis
+Avant de lancer le projet, assure-toi d’avoir installé :
 
-```bash
+Node.js (version 18+ recommandée)
+npm ou yarn
+MongoDB (local ou MongoDB Atlas)
+
+Vérifier les versions :
+node -v
+npm -v
+
+2️⃣ Cloner le projet
+git clone <url-du-repo>
+cd grimoire-des-heros
+
+3️⃣ Installer les dépendances
+npm install
+
+4️⃣ Configuration des variables d’environnement
+Créer un fichier à la racine du projet :
+.env.local
+
+Ajouter :
+MONGODB_URI=mongodb://127.0.0.1:27017/grimoire
+JWT_SECRET=une_clef_secrete_tres_complexe
+
+5️⃣ Lancer MongoDB
+Si MongoDB est installé en local :
+mongod
+Ou utiliser MongoDB Compass.
+
+6️⃣ Lancer l’application
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Puis ouvrir :
+http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
->>>>>>> master
+🧩 Fonctionnalités
+Authentification (register / login / logout)
+Génération aléatoire de personnages DnD
+Intégration API DnD (races / classes)
+Génération stats 4d6 drop lowest
+Sauvegarde en base MongoDB
+Bibliothèque personnelle
+Suppression de personnage
+Interface fantasy immersive
