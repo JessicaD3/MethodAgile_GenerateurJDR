@@ -6,6 +6,7 @@ import { Tabs } from "./Tabs";
 import { LoginModal } from "./LoginModal";
 import { RegisterModal } from "./RegisterModal";
 import { useAuth } from "./useAuth";
+import { CharacterBuilder } from "./CharactersBuilder";
 
 export function AppShell() {
   const { user, logout, refreshUser } = useAuth();
@@ -29,23 +30,11 @@ export function AppShell() {
       <div className="tabs-container">
         {activeTab === "creation" && (
           <div className="tab-content active" id="creation-tab">
-            <div className="main-content">
-              <div className="character-form">
-                <h3 className="form-title">
-                  <i className="fas fa-user" /> Identité du Personnage
-                </h3>
-                <p>Formulaire en cours d’implémentation...</p>
-              </div>
-
-              <div className="character-sheet">
-                <div className="sheet-header">
-                  <h2 className="character-name">Sans nom</h2>
-                  <p className="character-details">
-                    Race Classe de niveau 1
-                  </p>
-                </div>
-              </div>
-            </div>
+            {activeTab === "creation" && (
+  <div className="tab-content active" id="creation-tab">
+    <CharacterBuilder user={user} />
+  </div>
+)}
           </div>
         )}
 
