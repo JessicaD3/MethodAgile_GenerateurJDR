@@ -3,15 +3,26 @@
 import { useState } from "react";
 import { Header } from "./Header";
 import { Tabs } from "./Tabs";
+import { LoginModal } from "./LoginModal";
+import { RegisterModal } from "./RegisterModal";
 import { useAuth } from "./useAuth";
 
-// Composant principal de l'application qui gère l'affichage du header, des onglets et du contenu associé
 export function AppShell() {
-  const { user, logout } = useAuth();
+  const { user, logout, refreshUser } = useAuth();
+
   const [activeTab, setActiveTab] = useState<"creation" | "library">("creation");
+
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [registerOpen, setRegisterOpen] = useState(false);
+
   return (
     <div className="container">
-    <Header user={user} onLogout={logout} />
+      <Header
+        user={user}
+        onLogout={logout}
+        onLogin={() => setLoginOpen(true)}
+        onRegister={() => setRegisterOpen(true)}
+      />
 
       <Tabs active={activeTab} onChange={setActiveTab} />
 
@@ -23,13 +34,15 @@ export function AppShell() {
                 <h3 className="form-title">
                   <i className="fas fa-user" /> Identité du Personnage
                 </h3>
-                {/* Formulaire viendra étape suivante */}
+                <p>Formulaire en cours d’implémentation...</p>
               </div>
 
               <div className="character-sheet">
                 <div className="sheet-header">
                   <h2 className="character-name">Sans nom</h2>
-                  <p className="character-details">Race Classe de niveau 1</p>
+                  <p className="character-details">
+                    Race Classe de niveau 1
+                  </p>
                 </div>
               </div>
             </div>
@@ -40,11 +53,29 @@ export function AppShell() {
           <div className="tab-content active" id="library-tab">
             <div className="library-content">
               <h2>Bibliothèque des Aventuriers</h2>
-              <p>Connexion requise pour afficher la bibliothèque.</p>
+
+              {user ? (
+                <p>Bibliothèque en cours d’implémentation...</p>
+              ) : (
+                <p>Connexion requise pour afficher la bibliothèque.</p>
+              )}
             </div>
           </div>
         )}
       </div>
+
+      {/* MODALS */}
+      <LoginModal
+        isOpen={loginOpen}
+        onClose={() => setLoginOpen(false)}
+        onSuccess={refreshUser}
+      />
+
+      <RegisterModal
+        isOpen={registerOpen}
+        onClose={() => setRegisterOpen(false)}
+        onSuccess={refreshUser}
+      />
 
       <footer>
         <p>

@@ -5,9 +5,11 @@ type Props = {
     email: string;
   } | null;
   onLogout: () => void;
+  onLogin: () => void;
+  onRegister: () => void;
 };
 
-export function Header({ user, onLogout }: Props) {
+export function Header({ user, onLogout, onLogin, onRegister }: Props) {
   return (
     <header className="app-header">
       <div className="title-container">
@@ -43,11 +45,11 @@ export function Header({ user, onLogout }: Props) {
             </button>
           ) : (
             <>
-              <button className="auth-btn">
+              <button className="auth-btn" onClick={onLogin}>
                 <i className="fas fa-sign-in-alt" />
                 Se Connecter
               </button>
-              <button className="auth-btn register">
+              <button className="auth-btn register" onClick={onRegister}>
                 <i className="fas fa-user-plus" />
                 Créer un Compte
               </button>
