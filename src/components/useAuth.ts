@@ -2,45 +2,53 @@
 
 import { useEffect, useState } from "react";
 
-// Hook personnalisé pour gérer l'authentification de l'utilisateur
 export type AuthUser = {
   _id: string;
   username: string;
   email: string;
 };
 
-
-// Ce hook fournit les informations de l'utilisateur connecté, un indicateur de chargement, une fonction pour rafraîchir les données de l'utilisateur et une fonction pour se déconnecter
+// Hook personnalisé pour gérer l'authentification de l'utilisateur
 export function useAuth() {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(true);
 
-  async function refreshUser() {
+  // Fonction pour récupérer les informations de l'utilisateur connecté depuis l'API
+  async function fetchUser() {
     try {
       const res = await fetch("/api/auth/me");
+
+      if (!res.ok) {
+        setUser(null);
+        return;
+      }
+
       const data = await res.json();
-      setUser(data.user ?? null);
-    } catch {
+      setUser(data.user);
+    } catch (error) {
       setUser(null);
     } finally {
       setLoading(false);
     }
   }
 
-  
   useEffect(() => {
-    refreshUser();
+    fetchUser();
   }, []);
 
+  // Fonction de déconnexion qui appelle l'API pour supprimer le token et met à jour l'état utilisateur
   async function logout() {
-    await fetch("/api/auth/logout", { method: "POST" });
+    await fetch("/api/auth/logout", {
+      method: "POST",
+    });
+
     setUser(null);
   }
 
   return {
     user,
     loading,
-    refreshUser,
+    refreshUser: fetchUser,
     logout,
   };
 }

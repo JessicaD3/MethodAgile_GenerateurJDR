@@ -3,14 +3,15 @@
 import { useState } from "react";
 import { Header } from "./Header";
 import { Tabs } from "./Tabs";
+import { useAuth } from "./useAuth";
 
 // Composant principal de l'application qui gère l'affichage du header, des onglets et du contenu associé
 export function AppShell() {
+  const { user, logout } = useAuth();
   const [activeTab, setActiveTab] = useState<"creation" | "library">("creation");
-
   return (
     <div className="container">
-      <Header />
+    <Header user={user} onLogout={logout} />
 
       <Tabs active={activeTab} onChange={setActiveTab} />
 
